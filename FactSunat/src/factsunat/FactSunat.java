@@ -5,6 +5,8 @@
  */
 package factsunat;
 
+import Frames.menu;
+
 /**
  *
  * @author Usuario
@@ -16,6 +18,8 @@ public class FactSunat {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        menu obj=new menu();
+        obj.setVisible(true);
     }
     
 }

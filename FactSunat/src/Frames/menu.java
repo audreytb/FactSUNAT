@@ -5,6 +5,14 @@
  */
 package Frames;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Usuario
@@ -170,7 +178,6 @@ public class menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("R.U.C : 100981239874");
 
-        jTextField1.setText("0 -");
         jTextField1.setBorder(null);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,6 +286,11 @@ public class menu extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frame/Images/enviar.png"))); // NOI18N
         jButton2.setContentAreaFilled(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 90, 40));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 670, 500));
@@ -304,6 +316,80 @@ public class menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String numeroComprobante=jTextField1.getText();
+        
+        String tipoOperacion="12";
+        String fechaEmision=jTextField2.getText();
+        String codigoDomicilio="000";
+        String tipoDocumento="1";
+        String numDocumento=UserName.getText();
+        String nombre=UserName1.getText();
+        String tipoMoneda="PEN";
+        String descuentos="0.00";
+        String otrosCargos="0.00";
+        String totalDescuentos="0.00";
+        //String totalVentaGravadas=jTextField3.getText();
+        String totalVentaGravadas="1025.00";
+        String totalVentaInafectas="0.00";
+        String totalVentaExoneradas="0.00";
+        //String IGV=String.format("%.2f",Double.parseDouble(totalVentaGravadas)*0.18);
+        String IGV="184.50";
+        String ISC="0.00";
+        String otrosTributos="0.00";
+        /*String importeTotal=String.format("%.2f",Double.parseDouble(totalVentaGravadas)+
+                Double.parseDouble(totalVentaInafectas)+
+                Double.parseDouble(totalVentaExoneradas)+
+                Double.parseDouble(IGV));*/
+        String importeTotal="1209.50";
+        
+        
+        String codigoUnidad="NIU";
+        String cantidadUnidades="41.00";
+        String codigoProducto="";
+        String codigoProductoSunat="";
+        String descripcion="ACEITE GULF GEAR MP SAE 85W140 GL-5";
+        String valorUnitario="25.00";
+        String descuentoItem="0.00";
+        String IGVItem="4.50";
+        String afectacionIGV="10";
+        String ISCItem="0.00";
+        String tipoISC="01";
+        String precioVentaItem="1025.00";
+        String valorVentaItem="1209.50";
+        
+        
+        String rutaCab="20600686632-03-FA03-"+numeroComprobante+".cab";
+        File archivoCab=new File(rutaCab);
+        try {
+            BufferedWriter bwCab= new BufferedWriter(new FileWriter(archivoCab));
+            bwCab.write(tipoOperacion+"|"+fechaEmision+"|"+codigoDomicilio+"|"+
+                    tipoDocumento+"|"+numDocumento+"|"+nombre+"|"+
+                    tipoMoneda+"|"+descuentos+"|"+otrosCargos+"|"+
+                    totalDescuentos+"|"+totalVentaGravadas+"|"+totalVentaInafectas+"|"+
+                    totalVentaExoneradas+"|"+IGV+"|"+ISC+"|"+otrosTributos+"|"+
+                    importeTotal);
+            bwCab.close();
+        } catch (IOException ex) {
+            Logger.getLogger(menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String rutaDet="20600686632-03-FA03-"+numeroComprobante+".det";
+        File archivoDet=new File(rutaDet);
+        try {
+            BufferedWriter bwDet= new BufferedWriter(new FileWriter(archivoDet));
+            bwDet.write(codigoUnidad+"|"+cantidadUnidades+"|"+codigoProducto+"|"+
+                    codigoProductoSunat+"|"+descripcion+"|"+valorUnitario+"|"+
+                    descuentoItem+"|"+IGVItem+"|"+afectacionIGV+"|"+
+                    ISCItem+"|"+tipoISC+"|"+precioVentaItem+"|"+
+                    valorVentaItem);
+            bwDet.close();
+        } catch (IOException ex) {
+            Logger.getLogger(menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
